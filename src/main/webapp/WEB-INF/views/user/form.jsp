@@ -8,26 +8,19 @@
     <title>Registration</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <style>
-        input, select{
+        input, select, textarea{
             display: block;
             margin:15px 0;
             width: 100%;
         }
     </style>
-    <div class="p-3 mb-2 bg-dark text-white">
-        <h3 class="text-center">Join Language School Community</h3>
-    </div>
-</head>
+    <%@include file="/WEB-INF/views/header.jsp"%>
 <body class="p-3 mb-2 bg-info text-white">
 
-
 <form:form method="post"
-           action="${pageContext.request.contextPath}/user/registration"
-           modelAttribute="userForm"
-           cssClass="container col-6" >
-
-    <form:input path="username" placeholder="Username" cssClass="form-input"/>
-    <form:errors path="username" cssClass="alert alert-danger" element="div"/>
+           action="${pageContext.request.contextPath}/user/save"
+           modelAttribute="user"
+           cssClass="container col-2" >
 
     <form:input path="email" placeholder="Email" cssClass="form-input"/>
     <form:errors path="email" cssClass="alert alert-danger" element="div"/>
@@ -38,10 +31,18 @@
     <form:input type="password" path="passwordConfirm" cssClass="form-input" placeholder="Confirm your password"/>
     <form:errors path="passwordConfirm" cssClass="alert alert-danger" element="div"/>
 
-    <input type="submit" value="Send" class="btn btn-dark">
+    <form:textarea path="details.description" cssClass="form-input" placeholder="Description"/>
+
+    <form:select path="roles">
+        <form:options items="${roles}"
+                      itemValue="id"
+                      itemLabel="name" />
+    </form:select>
+    <p></p>
+    Enabled: <form:checkbox path="enabled" value="${user.enabled}"/>
+    <p></p>
+    <input type="submit" value="Submit" class="btn btn-dark">
 </form:form>
-
-
 
 </body>
 <%@include file="/WEB-INF/views/footer.jsp"%>

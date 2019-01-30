@@ -4,8 +4,10 @@ package pl.coderslab.service;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.coderslab.entity.Group;
 import pl.coderslab.entity.Role;
 import pl.coderslab.entity.User;
+import pl.coderslab.repository.GroupRepository;
 import pl.coderslab.repository.RoleRepository;
 import pl.coderslab.repository.UserRepository;
 
@@ -25,11 +27,14 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private RoleRepository roleRepository;
 
+    @Autowired
+    private GroupRepository groupRepository;
+
     @Override
     public void save(User user) {
         user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
         if(user.getRoles().size()==0){
-            user.setRoles(Arrays.asList(roleRepository.findByName("ROLE_USER")));
+            user.setRoles(Arrays.asList(roleRepository.findByName("User")));
         }
         user.setEnabled(true);
         userRepository.save(user);
@@ -60,7 +65,6 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-
     @Override
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
@@ -77,5 +81,12 @@ public class UserServiceImpl implements UserService {
                 .stream()
                 .map(Role::getName)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Group> getGroupList(Long id) {
+
+        User user = userRepository.findOne(id);
+        return groupRepository.findByMembers(user);
     }
 }

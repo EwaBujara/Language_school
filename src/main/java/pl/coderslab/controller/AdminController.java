@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.entity.Group;
 import pl.coderslab.entity.Role;
 import pl.coderslab.entity.User;
+import pl.coderslab.repository.GroupRepository;
 import pl.coderslab.repository.RoleRepository;
 import pl.coderslab.repository.UserRepository;
 
@@ -24,18 +25,22 @@ public class AdminController {
     UserRepository userRepository;
 
     @Autowired
+    GroupRepository groupRepository;
+
+    @Autowired
     RoleRepository roleRepository;
-    @GetMapping("/edit/{id}")
+
+    @GetMapping("/show/{id}")
     @Transactional
-    public String add(
+    public String show(
             Model model,
             @PathVariable Long id){
 
         User user = userRepository.findOne(id);
         model.addAttribute("user", user);
-        List<Group> groups = user.getGroups();
+        List<Group> groups = groupRepository.findByMembers(user);
         model.addAttribute("groups",groups);
-        return "admin/completeUserAccount";
+        return "user/account";
     }
 
     @ModelAttribute("users")

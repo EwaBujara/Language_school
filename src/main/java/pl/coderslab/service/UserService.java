@@ -1,5 +1,6 @@
 package pl.coderslab.service;
 
+import pl.coderslab.entity.Group;
 import pl.coderslab.entity.User;
 
 import javax.servlet.http.HttpSession;
@@ -17,4 +18,6 @@ public interface UserService {
     User findByEmail(String email);
 
     List<String> getRolesList(User user);
+
+    List<Group> getGroupList(Long id);
 }

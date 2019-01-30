@@ -5,8 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import pl.coderslab.entity.Group;
 import pl.coderslab.entity.Role;
 import pl.coderslab.entity.User;
+import pl.coderslab.repository.GroupRepository;
 import pl.coderslab.repository.RoleRepository;
 import pl.coderslab.repository.UserRepository;
 import pl.coderslab.service.UserService;
@@ -15,6 +17,7 @@ import pl.coderslab.validator.UserLogValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Controller
@@ -35,6 +38,7 @@ public class UserController {
 
     @Autowired
     private RoleRepository roleRepository;
+
 
     @GetMapping("/registration")
     public String registration(Model model) {
@@ -57,7 +61,7 @@ public class UserController {
         userService.save(userForm);
         session.setAttribute("currentUser", userForm);
         session.setAttribute("currentUserRoles", userService.getRolesList(userForm));
-        return "user/teacher";
+        return "user/list";
     }
 
     @GetMapping("/login")
@@ -87,42 +91,25 @@ public class UserController {
     }
 
 
-
     @RequestMapping("/list")
     public String showAll(Model model){
         model.addAttribute("users", userRepository.findAll());
         return "user/list";
     }
 
-
-    @GetMapping("/edit/{id}")
-    public String add(
+    @GetMapping("/show/{id}")
+    @Transactional
+    public String show(
             Model model,
-            @PathVariable Long id){
+            @PathVariable Long id
+    ){
 
-        model.addAttribute("user", userRepository.findOne(id));
+        User user = userRepository.findOne(id);
+        model.addAttribute("user", user);
+        List<Group> groups = userService.getGroupList(id);
+        model.addAttribute("groups",groups);
         return "user/account";
-    }
 
-    @RequestMapping("/delete/{id}")
-    public String delete(
-            @PathVariable Long id,
-            HttpServletRequest request,
-            HttpSession session){
-        userService.delete(session,id);
-        return "redirect:"+request.getContextPath()+"/home";
-    }
-
-    @GetMapping("/student")
-    public String home1Sender(){
-
-        return "student";
-    }
-
-    @GetMapping("/teacher")
-    public String home2Sender(){
-
-        return "teacher";
     }
 
     @ModelAttribute("users")
@@ -130,6 +117,43 @@ public class UserController {
 
     @ModelAttribute("roles")
     public List<Role> roles(){return roleRepository.findAll();}
+
+
+//    @GetMapping("/edit/{id}")
+//    public String add(
+//            Model model,
+//            @PathVariable Long id){
+//
+//        model.addAttribute("user", userRepository.findOne(id));
+//        return "user/account";
+//    }
+//
+//    @RequestMapping("/delete/{id}")
+//    public String delete(
+//            @PathVariable Long id,
+//            HttpServletRequest request,
+//            HttpSession session){
+//        userService.delete(session,id);
+//        return "redirect:"+request.getContextPath()+"/home";
+//    }
+//
+//    @GetMapping("/student")
+//    public String home1Sender(){
+//
+//        return "student";
+//    }
+//
+//    @GetMapping("/teacher")
+//    public String home2Sender(){
+//
+//        return "teacher";
+//    }
+//
+//    @ModelAttribute("users")
+//    public List<User> users (){return userRepository.findAll();}
+//
+//    @ModelAttribute("roles")
+//    public List<Role> roles(){return roleRepository.findAll();}
 
 }
 

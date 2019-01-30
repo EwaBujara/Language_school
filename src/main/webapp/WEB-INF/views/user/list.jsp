@@ -28,7 +28,7 @@
             <td>${user.email}</td>
             <td>
                 <a class="btn btn-dark" href="http://localhost:8080/home">Send message</a>
-                <a class="btn btn-dark" href="http://localhost:8080/admin/edit/${user.id}">Account</a>
+                <a class="btn btn-dark" href="http://localhost:8080/user/show/${user.id}">Account</a>
             </td>
         </tr>
     </c:forEach>
