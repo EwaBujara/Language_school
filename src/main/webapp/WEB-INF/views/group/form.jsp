@@ -20,12 +20,12 @@
 
 
 <form:form method="post"
-           modelAttribute="comment"
-           action="${pageContext.request.contextPath}/forum/${groupId}/thread/${threadId}/addComment"
+           modelAttribute="group"
+           action="${pageContext.request.contextPath}/admin/addGroup"
            cssClass="container col-6" >
 
-    <form:textarea path="text" placeholder="Your comment" cssClass="form-input"/>
-    <form:errors path="text" cssClass="alert alert-danger" element="div"/>
+    <form:textarea path="name" placeholder="Group Name" cssClass="form-input"/>
+    <form:errors path="name" cssClass="alert alert-danger" element="div"/>
 
     <input type="submit" value="Send"  class="btn btn-dark">
 </form:form>

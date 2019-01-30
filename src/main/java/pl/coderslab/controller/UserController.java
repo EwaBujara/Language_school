@@ -52,6 +52,7 @@ public class UserController {
     @PostMapping("/registration")
     public String registration(@ModelAttribute("userForm") User userForm,
                                BindingResult bindingResult,
+                               HttpServletRequest request,
                                HttpSession session) {
 
         newUserValidator.validate(userForm, bindingResult);
@@ -64,7 +65,8 @@ public class UserController {
         session.setAttribute("currentUser", userForm);
         session.setAttribute("currentUserRoles", userService.getRolesList(userForm));
         session.setAttribute("currentUserGroups", userService.getGroupsName(userForm));
-        return "user/list";
+
+        return "redirect:"+request.getContextPath()+"/group/1";
     }
 
     @GetMapping("/login")
@@ -91,7 +93,7 @@ public class UserController {
         session.setAttribute("currentUserRoles", userService.getRolesList(currentUser));
         session.setAttribute("currentUserGroups", userService.getGroupsName(currentUser));
 
-        return "redirect:"+request.getContextPath()+"/user/list";
+        return "redirect:"+request.getContextPath()+"/group/1";
     }
 
 

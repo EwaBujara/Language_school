@@ -9,4 +9,5 @@ import java.util.List;
 public interface ThreadRepository extends JpaRepository<Thread, Long> {
 
     List<Thread> findAllByGroupId(Long id);
+
 }

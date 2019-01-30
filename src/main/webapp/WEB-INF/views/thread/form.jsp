@@ -5,7 +5,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Add New Meow</title>
+    <title>Add New Thread</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <style>
         input, textarea{
@@ -18,29 +18,22 @@
 
 <body class="p-3 mb-2 bg-info text-white">
 
-<c:if test="${currentUser == null}">
-    <div class="p-3 mb-2 bg-light text-dark">
-        <h3 class="text-center">You have no access!</h3>
-        <p class="text-center">You must be sign in</p>
-    </div>
-</c:if>
 
-<c:if test="${currentUser != null}">
     <form:form method="post"
-           action="${pageContext.request.contextPath}/meow/add"
-           modelAttribute="meow"
+           action="${pageContext.request.contextPath}/forum/${groupId}/add"
+           modelAttribute="thread"
            cssClass="container col-6" >
 
 
     <form:input path="title" placeholder="Title" cssClass="form-input"/>
     <form:errors path="title" cssClass="alert alert-danger" element="div"/>
 
-    <form:textarea path="meowText" placeholder="Meow Text" cssClass="form-input"/>
-    <form:errors path="meowText" cssClass="alert alert-danger" element="div"/>
+    <form:textarea path="text" placeholder="Text" cssClass="form-input"/>
+    <form:errors path="text" cssClass="alert alert-danger" element="div"/>
 
     <input type="submit" value="Send"  class="btn btn-dark">
 </form:form>
-</c:if>
+
 </body>
 <%@include file="/WEB-INF/views/footer.jsp"%>
 </html>

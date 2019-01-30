@@ -1,6 +1,9 @@
 package pl.coderslab.entity;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -11,6 +14,8 @@ public class Group {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotEmpty
+    @Size(min = 3, max = 20)
     private String name;
 
     @ManyToMany(mappedBy = "groups")

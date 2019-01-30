@@ -24,7 +24,7 @@
     <h4 class="text-center container col-6">${thread.text}</h4>
 </div>
 
-<a class="btn btn-dark float-right" href="http://localhost:8080/comment/add/${meow.id}">Add new comment</a>
+<a class="btn btn-dark float-right" href="http://localhost:8080/forum/${groupId}/thread/${thread.id}/addComment">Add new comment</a>
 <h5>Comments (${comments.size()}):</h5>
 
 <table class="table table-striped">

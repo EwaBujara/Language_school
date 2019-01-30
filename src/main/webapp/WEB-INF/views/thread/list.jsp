@@ -5,15 +5,19 @@
 <html>
 <head>
     <title>Thread List</title>
-</head>
-<body>
+    <%@include file="/WEB-INF/views/header.jsp"%>
+<body class="p-3 mb-2 bg-info text-white">
+
+<c:if test='${fn:contains(currentUserRoles, "Teacher")}'>
+<a class="btn btn-dark" href="http://localhost:8080/forum/${groupId}/add">Add New Thread</a>
+</c:if>
 
 <table class="table table-striped">
     <tr>
         <th>Title</th>
         <th>Author</th>
         <th>Created</th>
-        <th>Meow</th>
+        <th>Thread</th>
         <th>Actions</th>
     </tr>
     <c:forEach items="${threads}" var="thread">
@@ -30,4 +34,5 @@
 
 
 </body>
+<%@include file="/WEB-INF/views/footer.jsp"%>
 </html>

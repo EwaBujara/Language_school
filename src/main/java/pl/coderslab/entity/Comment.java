@@ -1,6 +1,9 @@
 package pl.coderslab.entity;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 @Entity
@@ -10,6 +13,10 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long Id;
+
+    @NotEmpty
+    @Size(max = 60)
+    private String text;
 
     @ManyToOne
     private Thread thread;
@@ -53,5 +60,13 @@ public class Comment {
 
     public void setCreated(LocalDate created) {
         this.created = created;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 }

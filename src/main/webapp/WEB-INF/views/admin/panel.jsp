@@ -9,6 +9,7 @@
 
 <div class="p-3 mb-2 bg-white text-dark">
     <a class="btn btn-info" href="http://localhost:8080/admin/groupList">Groups List</a>
+    <a class="btn btn-info" href="http://localhost:8080/admin/addGroup">Create New Group</a>
     <a class="btn btn-info" href="http://localhost:8080/admin/memberList">Members List</a>
 </div>
 
