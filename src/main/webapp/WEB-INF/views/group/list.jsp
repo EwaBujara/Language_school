@@ -16,7 +16,7 @@
         <tr>
             <td>${group.name}</td>
             <td>
-                <a class="btn btn-dark" href="http://localhost:8080/group/show/${group.id}">See more</a>
+                <a class="btn btn-dark" href="http://localhost:8080/group/${group.id}">See more</a>
             </td>
         </tr>
     </c:forEach>
