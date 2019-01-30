@@ -1,4 +1,7 @@
 package pl.coderslab.repository;
 
-public interface ThreadRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import pl.coderslab.entity.Thread;
+
+public interface ThreadRepository extends JpaRepository<Thread, Long> {
 }

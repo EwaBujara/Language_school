@@ -1,4 +1,8 @@
 package pl.coderslab.repository;
 
-public interface GroupRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import pl.coderslab.entity.Group;
+
+public interface GroupRepository extends JpaRepository<Group, Long> {
+    Group findByName(String name);
 }

@@ -1,12 +1,13 @@
 package pl.coderslab.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import pl.coderslab.entity.Role;
 import pl.coderslab.entity.User;
+import pl.coderslab.repository.RoleRepository;
 import pl.coderslab.repository.UserRepository;
 import pl.coderslab.service.UserService;
 import pl.coderslab.validator.NewUserValidator;
@@ -32,6 +33,8 @@ public class UserController {
     @Autowired
     private UserLogValidator userLogValidator;
 
+    @Autowired
+    private RoleRepository roleRepository;
 
     @GetMapping("/registration")
     public String registration(Model model) {
@@ -52,10 +55,9 @@ public class UserController {
         }
 
         userService.save(userForm);
-
         session.setAttribute("currentUser", userForm);
-
-        return "meow/list";
+        session.setAttribute("currentUserRoles", userService.getRolesList(userForm));
+        return "user/teacher";
     }
 
     @GetMapping("/login")
@@ -77,16 +79,13 @@ public class UserController {
             return "user/login";
         }
 
-        session.setAttribute("currentUser", userRepository.findByEmail(userLog.getEmail()));
-        return "redirect:"+request.getContextPath()+"/meow/list";
+        User currentUser = userRepository.findByEmail(userLog.getEmail());
+        session.setAttribute("currentUser", currentUser);
+        session.setAttribute("currentUserRoles", userService.getRolesList(currentUser));
+
+        return "redirect:"+request.getContextPath()+"/user/list";
     }
 
-
-    @GetMapping("/withoutLogin")
-    public String withoutLogin(HttpServletRequest request){
-
-        return "redirect:"+request.getContextPath()+"/meow/list";
-    }
 
 
     @RequestMapping("/list")
@@ -96,15 +95,13 @@ public class UserController {
     }
 
 
-    @GetMapping("/account")
-    public String showDetails(HttpServletRequest request){
-        return "user/account";
-    }
-
     @GetMapping("/edit/{id}")
-    public String add(Model model, @PathVariable Long id){
+    public String add(
+            Model model,
+            @PathVariable Long id){
+
         model.addAttribute("user", userRepository.findOne(id));
-        return "user/add";
+        return "user/account";
     }
 
     @RequestMapping("/delete/{id}")
@@ -116,7 +113,23 @@ public class UserController {
         return "redirect:"+request.getContextPath()+"/home";
     }
 
+    @GetMapping("/student")
+    public String home1Sender(){
+
+        return "student";
+    }
+
+    @GetMapping("/teacher")
+    public String home2Sender(){
+
+        return "teacher";
+    }
+
     @ModelAttribute("users")
     public List<User> users (){return userRepository.findAll();}
+
+    @ModelAttribute("roles")
+    public List<Role> roles(){return roleRepository.findAll();}
+
 }
 

@@ -13,4 +13,5 @@ public class HomeController {
         session.invalidate();
         return "index";
     }
+
 }

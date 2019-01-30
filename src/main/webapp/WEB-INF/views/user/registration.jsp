@@ -15,7 +15,7 @@
         }
     </style>
     <div class="p-3 mb-2 bg-dark text-white">
-        <h3 class="text-center">Join Meower community</h3>
+        <h3 class="text-center">Join Language School Community</h3>
     </div>
 </head>
 <body class="p-3 mb-2 bg-info text-white">
@@ -28,7 +28,6 @@
 
     <form:input path="username" placeholder="Username" cssClass="form-input"/>
     <form:errors path="username" cssClass="alert alert-danger" element="div"/>
-
 
     <form:input path="email" placeholder="Email" cssClass="form-input"/>
     <form:errors path="email" cssClass="alert alert-danger" element="div"/>

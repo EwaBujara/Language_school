@@ -4,9 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
+import pl.coderslab.entity.Group;
 import pl.coderslab.entity.Privilege;
 import pl.coderslab.entity.Role;
 import pl.coderslab.entity.User;
+import pl.coderslab.repository.GroupRepository;
 import pl.coderslab.repository.PrivilegeRepository;
 import pl.coderslab.repository.RoleRepository;
 import pl.coderslab.repository.UserRepository;
@@ -34,6 +36,9 @@ public class InitialDataLoader implements
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private GroupRepository groupRepository;
+
     @Override
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -44,9 +49,10 @@ public class InitialDataLoader implements
         Privilege teacherPrivilege = createPrivilegeIfNotFound("TEACHER_PRIVILEGE");
         Privilege studentPrivilege = createPrivilegeIfNotFound("STUDENT_PRIVILEGE");
 
-        Role adminRole = createRoleIfNotFound("ROLE_ADMIN", Arrays.asList(adminPrivilege));
-        Role teacherRole = createRoleIfNotFound("ROLE_TEACHER", Arrays.asList(teacherPrivilege));
-        Role userRole = createRoleIfNotFound("ROLE_USER", Arrays.asList(studentPrivilege));
+        Role adminRole = createRoleIfNotFound("Admin", Arrays.asList(adminPrivilege));
+        Role teacherRole = createRoleIfNotFound("Teacher", Arrays.asList(teacherPrivilege));
+        Role userRole = createRoleIfNotFound("User", Arrays.asList(studentPrivilege));
+        Group startGroup = createGroupIfNotFound("Start");
 
         User user = new User();
         user.setUsername("Admin");
@@ -54,6 +60,7 @@ public class InitialDataLoader implements
         user.setEmail("admin@admin.com");
         user.setRoles(Arrays.asList(adminRole, teacherRole, userRole));
         user.setEnabled(true);
+        user.setGroups(Arrays.asList(startGroup));
         userService.save(user);
 
         alreadySetup = true;
@@ -82,5 +89,16 @@ public class InitialDataLoader implements
             roleRepository.save(role);
         }
         return role;
+    }
+
+    @Transactional
+    public Group createGroupIfNotFound(String name){
+        Group group = groupRepository.findByName(name);
+        if(group == null){
+            group = new Group();
+            group.setName(name);
+            groupRepository.save(group);
+        }
+        return group;
     }
 }

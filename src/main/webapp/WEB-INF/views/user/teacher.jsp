@@ -8,15 +8,15 @@
 </head>
 <body>
 <p>I am: ${currentUser} :) My name is ${currentUser.username}</p>
-<c:if test='${fn:contains(currentUserRoles, "ROLE_USER")}'>
+<c:if test='${fn:contains(currentUserRoles, "User")}'>
     <p>i'm a student i can see this</p>
 </c:if>
 
-<c:if test='${fn:contains(currentUserRoles, "ROLE_TEACHER")}'>
+<c:if test='${fn:contains(currentUserRoles, "Teacher")}'>
     <p>i'm a teacher i can see this</p>
 </c:if>
 
-<c:if test='${fn:contains(currentUserRoles, "ROLE_ADMIN")}'>
+<c:if test='${fn:contains(currentUserRoles, "Admin")}'>
     <p>i'm an admin i can see this</p>
 </c:if>
 

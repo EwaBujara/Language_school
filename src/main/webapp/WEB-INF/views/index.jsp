@@ -10,13 +10,11 @@
     <a class="btn btn-info" href="http://localhost:8080/user/registration">Sign Up</a>
 </div>
 </head>
-<body class="p-3 mb-2 bg-info text-white">
+<body class="p-3 mb-2 bg-info text-dark">
 
-<a class="btn btn-dark text-center" href="http://localhost:8080/user/withoutLogin">Enter without login</a>
-
-<h1 class="text-center">Welcome to Meower</h1>
+<h1 class="text-center">Welcome to Language School</h1>
 <p class="text-center">
-    <img src="/images/0e1e8ace2d78fe052f607aae724720e7--beautiful-cats-cat-stuff.jpg" width="10%">
+    <%--<img src="/images/" width="10%">--%>
 </p>
 
 </body>

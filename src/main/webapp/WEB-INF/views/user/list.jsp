@@ -20,18 +20,17 @@
     <tr>
         <th>Name</th>
         <th>Email</th>
-        <th>Meows</th>
         <th>Actions</th>
     </tr>
     <c:forEach items="${users}" var="user">
-        <%--<c:if test="${currentUser.username != user.username}">--%>
         <tr>
             <td>${user.username}</td>
             <td>${user.email}</td>
-            <td><a class="btn btn-dark" href="http://localhost:8080/meow/list/${user.id}">${user.meows.size()}</a></td>
-            <td><a class="btn btn-dark" href="http://localhost:8080/home">Send message</a></td>
+            <td>
+                <a class="btn btn-dark" href="http://localhost:8080/home">Send message</a>
+                <a class="btn btn-dark" href="http://localhost:8080/admin/edit/${user.id}">Account</a>
+            </td>
         </tr>
-        <%--</c:if>--%>
     </c:forEach>
 </table>
 </c:if>

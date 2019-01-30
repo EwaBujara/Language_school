@@ -7,15 +7,14 @@
     <title>Login</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <style>
-        #id, input, select{
+        input, select{
             display: block;
             margin:15px 0;
             width: 100%;
         }
     </style>
-    <%--<%@include file="/WEB-INF/views/header.jsp"%>--%>
     <div class="p-3 mb-2 bg-dark text-white">
-        <h3 class="text-center">Welcome back to Meower</h3>
+        <h3 class="text-center">Have fun with Language School!</h3>
     </div>
 </head>
 <body class="p-3 mb-2 bg-info text-white">
@@ -31,11 +30,12 @@
     <form:password path="password" placeholder="Enter Your password" cssClass="form-input"/>
     <form:errors path="password" cssClass="alert alert-danger" element="div"/>
 
-    <input type="submit" value="Send" class="btn btn-dark">
+    <input type="submit" value="Enter" class="btn btn-dark">
 </form:form>
 
-<p></p>
+<div class="text-center">
     <a class="btn btn-dark container col-6" href="http://localhost:8080/user/registration">Create a new account</a>
+</div>
 
 </body>
 </html>
