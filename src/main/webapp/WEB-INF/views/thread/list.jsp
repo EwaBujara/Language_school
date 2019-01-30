@@ -22,7 +22,7 @@
             <td>${thread.user.username}</td>
             <td>${thread.created}</td>
             <td>${fn:substring(thread.text, 0, 40)}</td>
-            <td><a class="btn btn-dark" href="http://localhost:8080/meow/meow/${meow.id}">See more</a></td>
+            <td><a class="btn btn-dark" href="http://localhost:8080/forum/${groupId}/thread/${thread.id}">See more</a></td>
         </tr>
 
     </c:forEach>
