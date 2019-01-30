@@ -11,6 +11,7 @@
     <a class="btn btn-info float-right" href="http://localhost:8080/home">Log OUT</a>
         <p></p>
         <a class="btn btn-info" href="http://localhost:8080/user/show/${currentUser.id}">Your profile</a>
+        <a class="btn btn-info" href="http://localhost:8080/group/list">Groups</a>
     </c:if>
 
     <c:if test="${currentUser == null}">

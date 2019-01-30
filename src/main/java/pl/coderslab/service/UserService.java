@@ -20,4 +20,6 @@ public interface UserService {
     List<String> getRolesList(User user);
 
     List<Group> getGroupList(Long id);
+
+    List<String> getGroupsName(User user);
 }

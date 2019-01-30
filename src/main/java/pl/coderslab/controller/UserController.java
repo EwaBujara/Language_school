@@ -63,6 +63,7 @@ public class UserController {
         userService.save(userForm);
         session.setAttribute("currentUser", userForm);
         session.setAttribute("currentUserRoles", userService.getRolesList(userForm));
+        session.setAttribute("currentUserGroups", userService.getGroupsName(userForm));
         return "user/list";
     }
 
@@ -88,6 +89,7 @@ public class UserController {
         User currentUser = userRepository.findByEmail(userLog.getEmail());
         session.setAttribute("currentUser", currentUser);
         session.setAttribute("currentUserRoles", userService.getRolesList(currentUser));
+        session.setAttribute("currentUserGroups", userService.getGroupsName(currentUser));
 
         return "redirect:"+request.getContextPath()+"/user/list";
     }

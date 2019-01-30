@@ -36,6 +36,7 @@ public class UserServiceImpl implements UserService {
         if(user.getRoles().size()==0){
             user.setRoles(Arrays.asList(roleRepository.findByName("User")));
         }
+        user.setGroups(Arrays.asList(groupRepository.findByName("Bucket")));
         user.setEnabled(true);
         userRepository.save(user);
     }
@@ -88,5 +89,13 @@ public class UserServiceImpl implements UserService {
 
         User user = userRepository.findOne(id);
         return groupRepository.findByMembers(user);
+    }
+
+    @Override
+    public List<String> getGroupsName(User user) {
+        return getGroupList(user.getId())
+                .stream()
+                .map(Group::getName)
+                .collect(Collectors.toList());
     }
 }

@@ -13,8 +13,11 @@ public class Group {
 
     private String name;
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "groups")
+    @ManyToMany(mappedBy = "groups")
     private List<User> members;
+
+    @OneToMany(mappedBy = "group")
+    private List<Thread> threads;
 
     public Group() {
     }
@@ -43,7 +46,17 @@ public class Group {
         this.members = members;
     }
 
+    public List<Thread> getThreads() {
+        return threads;
+    }
+
+    public void setThreads(List<Thread> threads) {
+        this.threads = threads;
+    }
+
     public String toString() {
         return name;
     }
+
+
 }

@@ -3,24 +3,20 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Users List</title>
+    <title>Groups</title>
     <%@include file="/WEB-INF/views/header.jsp"%>
 <body class="p-3 mb-2 bg-info text-white">
-
 
 <table class="table table-striped">
     <tr>
         <th>Name</th>
-        <th>Email</th>
         <th>Actions</th>
     </tr>
-    <c:forEach items="${users}" var="user">
+    <c:forEach items="${groups}" var="group">
         <tr>
-            <td>${user.username}</td>
-            <td>${user.email}</td>
+            <td>${group.name}</td>
             <td>
-                <a class="btn btn-dark" href="http://localhost:8080/home">Send message</a>
-                <a class="btn btn-dark" href="http://localhost:8080/user/show/${user.id}">Account</a>
+                <a class="btn btn-dark" href="http://localhost:8080/group/show/${group.id}">See more</a>
             </td>
         </tr>
     </c:forEach>

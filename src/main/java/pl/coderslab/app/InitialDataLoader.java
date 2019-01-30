@@ -52,7 +52,7 @@ public class InitialDataLoader implements
         Role adminRole = createRoleIfNotFound("Admin", Arrays.asList(adminPrivilege));
         Role teacherRole = createRoleIfNotFound("Teacher", Arrays.asList(teacherPrivilege));
         Role userRole = createRoleIfNotFound("User", Arrays.asList(studentPrivilege));
-        Group startGroup = createGroupIfNotFound("Start");
+        Group startGroup = createGroupIfNotFound("Bucket");
 
         User user = new User();
         user.setUsername("Admin");

@@ -29,6 +29,9 @@ public class Thread {
     @ManyToOne
     private User user;
 
+    @ManyToOne
+    private Group group;
+
     @OneToMany(mappedBy = "thread")
     private List<Comment> commentList = new ArrayList<>();
 
@@ -81,5 +84,13 @@ public class Thread {
 
     public void setCommentList(List<Comment> commentList) {
         this.commentList = commentList;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
 }
