@@ -95,11 +95,6 @@ public class UserController {
     }
 
 
-    @RequestMapping("/list")
-    public String showAll(Model model){
-        model.addAttribute("users", userRepository.findAll());
-        return "user/list";
-    }
 
     @GetMapping("/show/{id}")
     @Transactional
