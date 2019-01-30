@@ -8,8 +8,10 @@
 <body class="p-3 mb-2 bg-info text-white">
 
 <div class="p-3 mb-2 bg-white text-dark">
-    <a class="btn btn-info" href="http://localhost:8080/forum/${group.id}">Forum</a>
-    <a class="btn btn-info" href="http://localhost:8080/group/members/${group.id}">Members List</a>
+    <a class="btn btn-info" href="http://localhost:8080/forum/${group.id}"> ${group.name}-Forum</a>
+    <c:if test="${group.id != 1}">
+    <a class="btn btn-info" href="http://localhost:8080/group/members/${group.id}">${group.name}-Members List</a>
+    </c:if>
 </div>
 
 

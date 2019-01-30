@@ -27,6 +27,7 @@
 
     <%--<form:input path="oldPassword" placeholder="Your old password"/>--%>
 
+    <c:if test="${currentUser.id == user.id}">
     <form:password path="password" placeholder="Enter Your new password" cssClass="form-input"/>
     <form:errors path="password" cssClass="alert alert-danger" element="div"/>
 
@@ -34,28 +35,27 @@
     <form:errors path="passwordConfirm" cssClass="alert alert-danger" element="div"/>
 
     <form:textarea path="details.description" cssClass="form-input" placeholder="Description"/>
+    </c:if>
 
+    <c:if test='${fn:contains(currentUserRoles, "Admin")}'>
     <p></p>
     Enabled: <form:checkbox path="enabled" value="${user.enabled}"/>
-
     Roles:
     <form:select path="roles">
         <form:options items="${roles}"
                       itemValue="id"
                       itemLabel="name" />
     </form:select>
+    </c:if>
 
+    <c:if test='${fn:contains(currentUserRoles, "Teacher")}'>
     Groups:
     <select name="groups" multiple>
         <c:forEach items="${groups}" var="group">
             <option value="${group.id}" >${group.name}</option>
         </c:forEach>
     </select>
-    <%--<form:select path="groups" multiple="true">--%>
-        <%--<form:options items="${groups}"--%>
-                      <%--itemValue="id"--%>
-                      <%--itemLabel="name" />--%>
-    <%--</form:select>--%>
+    </c:if>
 
     <input type="submit" value="Submit" class="btn btn-dark">
 </form:form>

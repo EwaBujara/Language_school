@@ -8,7 +8,7 @@
     <title>Add New Comment</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <style>
-        input, textarea{
+        input{
             display: block;
             margin:15px 0;
             width: 100%;
@@ -24,7 +24,7 @@
            action="${pageContext.request.contextPath}/admin/addGroup"
            cssClass="container col-6" >
 
-    <form:textarea path="name" placeholder="Group Name" cssClass="form-input"/>
+    <form:input path="name" placeholder="Group Name" cssClass="form-input"/>
     <form:errors path="name" cssClass="alert alert-danger" element="div"/>
 
     <input type="submit" value="Send"  class="btn btn-dark">
