@@ -39,6 +39,8 @@ public class UserController {
     @Autowired
     private RoleRepository roleRepository;
 
+    @Autowired
+    private GroupRepository groupRepository;
 
     @GetMapping("/registration")
     public String registration(Model model) {
@@ -119,14 +121,19 @@ public class UserController {
     public List<Role> roles(){return roleRepository.findAll();}
 
 
-//    @GetMapping("/edit/{id}")
-//    public String add(
-//            Model model,
-//            @PathVariable Long id){
-//
-//        model.addAttribute("user", userRepository.findOne(id));
-//        return "user/account";
-//    }
+    @Transactional
+    @GetMapping("/edit/{id}")
+    public String add(
+            Model model,
+            @PathVariable Long id){
+
+        User user = userRepository.findOne(id);
+        model.addAttribute("user", user);
+
+        List<Group> groups = groupRepository.findAll();
+        model.addAttribute("groups",groups);
+        return "user/form";
+    }
 //
 //    @RequestMapping("/delete/{id}")
 //    public String delete(

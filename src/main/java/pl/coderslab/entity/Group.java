@@ -42,4 +42,8 @@ public class Group {
     public void setMembers(List<User> members) {
         this.members = members;
     }
+
+    public String toString() {
+        return name;
+    }
 }

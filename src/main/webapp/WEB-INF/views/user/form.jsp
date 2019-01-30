@@ -22,28 +22,44 @@
            modelAttribute="user"
            cssClass="container col-2" >
 
-    <form:input path="email" placeholder="Email" cssClass="form-input"/>
-    <form:errors path="email" cssClass="alert alert-danger" element="div"/>
+    <%--<form:input path="email" placeholder="Email" cssClass="form-input"/>--%>
+    <%--<form:errors path="email" cssClass="alert alert-danger" element="div"/>--%>
 
-    <form:password path="password" placeholder="Enter Your password" cssClass="form-input"/>
+    <%--<form:input path="oldPassword" placeholder="Your old password"/>--%>
+
+    <form:password path="password" placeholder="Enter Your new password" cssClass="form-input"/>
     <form:errors path="password" cssClass="alert alert-danger" element="div"/>
 
-    <form:input type="password" path="passwordConfirm" cssClass="form-input" placeholder="Confirm your password"/>
+    <form:input type="password" path="passwordConfirm" cssClass="form-input" placeholder="Confirm your new password"/>
     <form:errors path="passwordConfirm" cssClass="alert alert-danger" element="div"/>
 
     <form:textarea path="details.description" cssClass="form-input" placeholder="Description"/>
 
+    <p></p>
+    Enabled: <form:checkbox path="enabled" value="${user.enabled}"/>
+
+    Roles:
     <form:select path="roles">
         <form:options items="${roles}"
                       itemValue="id"
                       itemLabel="name" />
     </form:select>
-    <p></p>
-    Enabled: <form:checkbox path="enabled" value="${user.enabled}"/>
-    <p></p>
+
+    Groups:
+    <select name="groups" multiple>
+        <c:forEach items="${groups}" var="group">
+            <option value="${group.id}" >${group.name}</option>
+        </c:forEach>
+    </select>
+    <%--<form:select path="groups" multiple="true">--%>
+        <%--<form:options items="${groups}"--%>
+                      <%--itemValue="id"--%>
+                      <%--itemLabel="name" />--%>
+    <%--</form:select>--%>
+
     <input type="submit" value="Submit" class="btn btn-dark">
 </form:form>
 
 </body>
 <%@include file="/WEB-INF/views/footer.jsp"%>
-</html>
+</html>`

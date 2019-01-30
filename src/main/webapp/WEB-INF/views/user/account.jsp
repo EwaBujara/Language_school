@@ -75,6 +75,11 @@
 
 </table>
 
+<c:if test='${fn:contains(currentUserRoles, "Admin") or currentUser.id==user.id}'>
+    <a class="btn btn-dark" href="http://localhost:8080/user/edit/${user.id}">Edit profile</a>
+</c:if>
+
+<p></p>
 </body>
 <%@include file="/WEB-INF/views/footer.jsp"%>
 </html>
