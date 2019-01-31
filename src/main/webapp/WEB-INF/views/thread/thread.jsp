@@ -32,12 +32,26 @@
         <th>Author</th>
         <th>Created</th>
         <th>Comment</th>
+    <c:if test='${ ( fn:contains(currentUserRoles, "Admin")
+    or (fn:contains(currentUserRoles,"Teacher") and (fn:contains(currentUserGroups,group.name) and group.id!=1)))}'>
+        <th>Action</th>
+    </c:if>
     </tr>
     <c:forEach items="${comments}" var="comment">
         <tr>
             <td>${comment.user.username}</td>
             <td>${comment.created}</td>
             <td>${comment.text}</td>
+
+            <c:if test='${ ( fn:contains(currentUserRoles, "Admin")
+    or (fn:contains(currentUserRoles,"Teacher") and (fn:contains(currentUserGroups,group.name) and group.id!=1)))}'>
+            <td>
+                <a class="btn btn-dark float-right"
+                   href="http://localhost:8080/forum/${groupId}/thread/${thread.id}/deleteComment/${comment.id}">
+                    Delete comment</a>
+            </td>
+            </c:if>
+
         </tr>
     </c:forEach>
 </table>

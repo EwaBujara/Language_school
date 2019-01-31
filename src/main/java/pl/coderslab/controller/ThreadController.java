@@ -99,4 +99,15 @@ public class ThreadController {
         commentRepository.save(comment);
         return "redirect:"+request.getContextPath()+"/forum/"+groupId+"/thread/"+threadId;
     }
+
+    @RequestMapping("/{groupId}/thread/{threadId}/deleteComment/{commentId}")
+    public String deleteComment(
+            @PathVariable Long groupId,
+            @PathVariable Long threadId,
+            @PathVariable Long commentId,
+            HttpServletRequest request){
+
+        commentRepository.delete(commentRepository.findOne(commentId));
+        return "redirect:"+request.getContextPath()+"/forum/"+groupId+"/thread/"+threadId;
+    }
 }

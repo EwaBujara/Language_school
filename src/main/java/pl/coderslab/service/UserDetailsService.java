@@ -47,6 +47,8 @@ public class UserDetailsService {
 
         User user = userRepository.findByUsername(userDTO.getUsername());
         user.setEnabled(userDTO.isEnabled());
+        user.setGroups(userDTO.getGroups());
+        user.setRoles(userDTO.getRoles());
         return user;
     }
 

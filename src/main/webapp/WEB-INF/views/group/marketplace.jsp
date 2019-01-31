@@ -29,8 +29,15 @@
     <c:forEach items="${links}" var="link">
         <tr>
             <td>${link.title}</td>
-            <td><a class="btn btn-dark" href="${link.url}">Enter</a></td>
+            <td>
+                <c:if test='${ ( fn:contains(currentUserRoles, "Admin")
+    or (fn:contains(currentUserRoles,"Teacher") and (fn:contains(currentUserGroups,group.name) and group.id!=1)))}'>
+                    <a class="btn btn-dark" href="http://localhost:8080/group/deleteLink/${link.id}">Delete</a>
+                </c:if>
+                <a class="btn btn-dark" href="${link.url}">Enter</a>
+            </td>
             <td><iframe src="${link.url}">IFrame</iframe></td>
+            <%--<td><iframe src="https://www.youtube.com/embed/c4pq38RFBL4">IFrame</iframe></td>--%>
         </tr>
 
     </c:forEach>

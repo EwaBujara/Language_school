@@ -19,7 +19,7 @@
 
 <form:form method="post"
            action="${pageContext.request.contextPath}/user/save"
-           modelAttribute="user"
+           modelAttribute="userDTO"
            cssClass="container col-2" >
 
     <%--<form:input path="email" placeholder="Email" cssClass="form-input"/>--%>
@@ -27,19 +27,19 @@
 
     <%--<form:input path="oldPassword" placeholder="Your old password"/>--%>
 
-    <c:if test="${currentUser.id == user.id}">
-    <form:password path="password" placeholder="Enter Your new password" cssClass="form-input"/>
-    <form:errors path="password" cssClass="alert alert-danger" element="div"/>
+    <c:if test="${currentUser.id == userDTO.id}">
+    <%--<form:password path="password" placeholder="Enter Your new password" cssClass="form-input"/>--%>
+    <%--<form:errors path="password" cssClass="alert alert-danger" element="div"/>--%>
 
-    <form:input type="password" path="passwordConfirm" cssClass="form-input" placeholder="Confirm your new password"/>
-    <form:errors path="passwordConfirm" cssClass="alert alert-danger" element="div"/>
+    <%--<form:input type="password" path="passwordConfirm" cssClass="form-input" placeholder="Confirm your new password"/>--%>
+    <%--<form:errors path="passwordConfirm" cssClass="alert alert-danger" element="div"/>--%>
 
     <form:textarea path="details.description" cssClass="form-input" placeholder="Description"/>
     </c:if>
 
     <c:if test='${fn:contains(currentUserRoles, "Admin")}'>
     <p></p>
-    Enabled: <form:checkbox path="enabled" value="${user.enabled}"/>
+    Enabled: <form:checkbox path="enabled" value="${userDTO.enabled}"/>
     Roles:
     <form:select path="roles">
         <form:options items="${roles}"
