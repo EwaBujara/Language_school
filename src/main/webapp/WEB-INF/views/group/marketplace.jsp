@@ -14,9 +14,9 @@
     <a class="btn btn-info" href="http://localhost:8080/group/members/${group.id}">${group.name}-Members List</a>
     </c:if>
 
-    <c:if test='${fn:contains(currentUserRoles, "Teacher")}'>
-    <%--<c:if test='${ ( fn:contains(currentUserRoles, "Admin")--%>
-    <%--or (fn:contains(currentUserRoles,"Teacher") and (fn:contains(currentUserGroups,group.name) and group.id!=1)))}'>--%>
+    <%--<c:if test='${fn:contains(currentUserRoles, "Teacher")}'>--%>
+    <c:if test='${ ( fn:contains(currentUserRoles, "Admin")
+    or (fn:contains(currentUserRoles,"Teacher") and (fn:contains(currentUserGroups,group.name) and group.id!=1)))}'>
         <a class="btn btn-info" href="http://localhost:8080/group/${group.id}/addLink">Add New Link</a>
     </c:if>
 </div>

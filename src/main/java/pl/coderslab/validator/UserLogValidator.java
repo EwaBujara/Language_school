@@ -34,5 +34,9 @@ public class UserLogValidator implements Validator {
         if(!userService.verify(user)){
             errors.rejectValue("password", "nonMatching.userLog.password");
         }
+
+//        if(!user.isEnabled()){
+//            errors.rejectValue("email", "accessDenied.userLog.email");
+//        }
     }
 }

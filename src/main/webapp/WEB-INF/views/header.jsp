@@ -9,12 +9,14 @@
 <div class="p-3 mb-2 bg-dark text-white">
     <c:if test="${currentUser != null}">
     <p class="text-right">Welcome, ${currentUser.getUsername()}</p>
-    <a class="btn btn-info float-right" href="http://localhost:8080/home">Log OUT</a>
         <p></p>
-        <a class="btn btn-info" href="http://localhost:8080/group/1">Home</a>
+    <a class="btn btn-info float-right" href="http://localhost:8080/home">Log OUT</a>
+
+        <p></p>
         <c:if test='${fn:contains(currentUserRoles, "Admin")}'>
-        <a class="btn btn-info" href="http://localhost:8080/admin">Admin panel</a>
+            <a class="btn btn-danger" href="http://localhost:8080/admin">Admin panel</a>
         </c:if>
+        <a class="btn btn-info" href="http://localhost:8080/group/1">Home</a>
         <a class="btn btn-info" href="http://localhost:8080/user/show/${currentUser.id}">Your profile</a>
         <a class="btn btn-info" href="http://localhost:8080/group/list/${currentUser.id}">Your Groups</a>
     </c:if>

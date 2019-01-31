@@ -122,6 +122,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean whoAmI(User user, String roleName) {
-        return doesTheListContainsString(getGroupsName(user), roleName);
+        return doesTheListContainsString(getRolesList(user), roleName);
     }
 }

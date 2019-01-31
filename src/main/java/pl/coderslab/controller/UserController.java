@@ -160,6 +160,7 @@ public class UserController {
             oldUserDetails.setDescription(userDetails.getDescription());
             oldUserDetails.setAddress(userDetails.getAddress());
             oldUserDetails.setAccountNumber(userDetails.getAccountNumber());
+            userDetailsRepository.save(oldUserDetails);
 
         }else if (userService.whoAmI(currentUser, "Admin")&&(oldUser.getId()!=currentUser.getId()))
         {
@@ -172,9 +173,10 @@ public class UserController {
             oldUserDetails.setDescription(userDetails.getDescription());
             oldUserDetails.setAddress(userDetails.getAddress());
             oldUserDetails.setAccountNumber(userDetails.getAccountNumber());
+            userDetailsRepository.save(oldUserDetails);
         }
 
-        userDetailsRepository.save(oldUserDetails);
+
         return "redirect:"+request.getContextPath()+"/user/show/"+userId;
     }
 

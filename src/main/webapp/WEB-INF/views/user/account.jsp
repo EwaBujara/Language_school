@@ -19,7 +19,7 @@
         <th>Name</th>
         <th>Email</th>
         <th>Description</th>
-     <c:if test="${currentUser.id==user.id}">
+     <c:if test='${currentUser.id==user.id or fn:contains(currentUserRoles, "Admin")}'>
         <th>Address</th>
         <th>Account Number</th>
      </c:if>
@@ -33,7 +33,7 @@
         <td>${user.username}</td>
         <td>${user.email}</td>
         <td>${user.details.description}</td>
-    <c:if test="${currentUser.id==user.id}">
+        <c:if test='${currentUser.id==user.id or fn:contains(currentUserRoles, "Admin")}'>
         <td>${user.details.address}</td>
         <td>${user.details.accountNumber}</td>
     </c:if>
