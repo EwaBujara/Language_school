@@ -145,23 +145,36 @@ public class UserController {
                       @PathVariable Long userId,
                       HttpServletRequest request,
                       HttpSession session){
+
         User user = userDetailsService.parseToUser(userDTO);
+        UserDetails userDetails = userDetailsService.parseToUserDetails(userDTO);
         User currentUser =(User)session.getAttribute("currentUser");
-
         User oldUser = userRepository.findOne(userId);
-        user.setUsername(oldUser.getUsername());
-        user.setEmail(oldUser.getEmail());
-        user.setPassword(oldUser.getPassword());
+        UserDetails oldUserDetails = userDetailsRepository.findByUserUsername(oldUser.getUsername());
+//        userRepository.save(oldUser);
+        if(currentUser.getId()==1&&(oldUser.getId()==currentUser.getId())){
+            oldUser.setRoles(user.getRoles());
+            oldUser.setGroups(user.getGroups());
+            oldUser.setEnabled(user.isEnabled());
+            userRepository.save(oldUser);
+            oldUserDetails.setDescription(userDetails.getDescription());
+            oldUserDetails.setAddress(userDetails.getAddress());
+            oldUserDetails.setAccountNumber(userDetails.getAccountNumber());
 
-        if(!userService.getGroupsName(currentUser).contains("Admin")){
-            user.setRoles(oldUser.getRoles());
-            user.setGroups(oldUser.getGroups());
-            user.setEnabled(oldUser.isEnabled());
+        }else if (currentUser.getId()==1&&(oldUser.getId()!=currentUser.getId()))
+        {
+            oldUser.setRoles(user.getRoles());
+            oldUser.setGroups(user.getGroups());
+            oldUser.setEnabled(user.isEnabled());
+            userRepository.save(oldUser);
+
+        }else {
+            oldUserDetails.setDescription(userDetails.getDescription());
+            oldUserDetails.setAddress(userDetails.getAddress());
+            oldUserDetails.setAccountNumber(userDetails.getAccountNumber());
         }
 
-        userRepository.save(user);
-        UserDetails userDetails = userDetailsService.parseToUserDetails(userDTO);
-        userDetailsRepository.save(userDetails);
+        userDetailsRepository.save(oldUserDetails);
         return "redirect:"+request.getContextPath()+"/user/show/"+userId;
     }
 

@@ -33,27 +33,13 @@ public class UserDetailsService {
 
         userDTO.setUsername(user.getUsername());
         userDTO.setEmail(user.getEmail());
-        userDTO.setPassword(user.getPassword());
+//        userDTO.setPassword(user.getPassword());
         userDTO.setEnabled(user.isEnabled());
         userDTO.setRoles(roleRepository.findAllByUsers(Arrays.asList(user)));
         userDTO.setGroups(groupRepository.findByMembers(user));
-        if(null == userDetails.getDescription()){
-            userDTO.setDescription("");
-        }else {
-
+        if(userDetails!=null){
             userDTO.setDescription(userDetails.getDescription());
-        }
-
-        if(userDetails.getAddress() == null){
-            userDTO.setAddress("");
-        }else {
-
             userDTO.setAddress(userDetails.getAddress());
-        }
-        if(userDetails.getAccountNumber()==null){
-            userDTO.setAccountNumber("");
-        }else {
-
             userDTO.setAccountNumber(userDetails.getAccountNumber());
         }
         return userDTO;
@@ -61,7 +47,10 @@ public class UserDetailsService {
 
     public User parseToUser(UserDTO userDTO){
 
-        User user = userRepository.findByUsername(userDTO.getUsername());
+        User user = new User();
+        user.setUsername(userDTO.getUsername());
+        user.setEmail(userDTO.getEmail());
+//        user.setPassword(userDTO.getPassword());
         user.setEnabled(userDTO.isEnabled());
         user.setGroups(userDTO.getGroups());
         user.setRoles(userDTO.getRoles());
@@ -69,7 +58,7 @@ public class UserDetailsService {
     }
 
     public UserDetails parseToUserDetails(UserDTO userDTO){
-        UserDetails userDetails = userDetailsRepository.findByUserUsername(userDTO.getUsername());
+        UserDetails userDetails = new UserDetails();
         userDetails.setDescription(userDTO.getDescription());
         userDetails.setAddress(userDTO.getAddress());
         userDetails.setAccountNumber(userDTO.getAccountNumber());
