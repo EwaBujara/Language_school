@@ -151,8 +151,8 @@ public class UserController {
         User currentUser =(User)session.getAttribute("currentUser");
         User oldUser = userRepository.findOne(userId);
         UserDetails oldUserDetails = userDetailsRepository.findByUserUsername(oldUser.getUsername());
-//        userRepository.save(oldUser);
-        if(currentUser.getId()==1&&(oldUser.getId()==currentUser.getId())){
+
+        if(userService.whoAmI(currentUser, "Admin")&&(oldUser.getId()==currentUser.getId())){
             oldUser.setRoles(user.getRoles());
             oldUser.setGroups(user.getGroups());
             oldUser.setEnabled(user.isEnabled());
@@ -161,7 +161,7 @@ public class UserController {
             oldUserDetails.setAddress(userDetails.getAddress());
             oldUserDetails.setAccountNumber(userDetails.getAccountNumber());
 
-        }else if (currentUser.getId()==1&&(oldUser.getId()!=currentUser.getId()))
+        }else if (userService.whoAmI(currentUser, "Admin")&&(oldUser.getId()!=currentUser.getId()))
         {
             oldUser.setRoles(user.getRoles());
             oldUser.setGroups(user.getGroups());

@@ -110,4 +110,18 @@ public class UserServiceImpl implements UserService {
                 .map(Group::getName)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public boolean doesTheListContainsString(List<String> strings, String string) {
+        for(String str: strings) {
+            if(str.contains(string))
+                return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean whoAmI(User user, String roleName) {
+        return doesTheListContainsString(getGroupsName(user), roleName);
+    }
 }

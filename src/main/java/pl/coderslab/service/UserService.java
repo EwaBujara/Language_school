@@ -22,4 +22,8 @@ public interface UserService {
     List<Group> getGroupList(Long id);
 
     List<String> getGroupsName(User user);
+
+    boolean doesTheListContainsString(List<String> strings,String string);
+
+    boolean whoAmI(User user, String string);
 }
