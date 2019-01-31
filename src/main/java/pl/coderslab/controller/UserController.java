@@ -143,8 +143,22 @@ public class UserController {
     @PostMapping("/edit/{userId}")
     public String add(@ModelAttribute("userDTO") UserDTO userDTO,
                       @PathVariable Long userId,
-                      HttpServletRequest request){
+                      HttpServletRequest request,
+                      HttpSession session){
         User user = userDetailsService.parseToUser(userDTO);
+        User currentUser =(User)session.getAttribute("currentUser");
+
+        User oldUser = userRepository.findOne(userId);
+        user.setUsername(oldUser.getUsername());
+        user.setEmail(oldUser.getEmail());
+        user.setPassword(oldUser.getPassword());
+
+        if(!userService.getGroupsName(currentUser).contains("Admin")){
+            user.setRoles(oldUser.getRoles());
+            user.setGroups(oldUser.getGroups());
+            user.setEnabled(oldUser.isEnabled());
+        }
+
         userRepository.save(user);
         UserDetails userDetails = userDetailsService.parseToUserDetails(userDTO);
         userDetailsRepository.save(userDetails);

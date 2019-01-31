@@ -17,6 +17,7 @@
     <%@include file="/WEB-INF/views/header.jsp"%>
 <body class="p-3 mb-2 bg-info text-white">
 
+<h3>${userDTO.username}</h3>
 <form:form method="post"
            action="${pageContext.request.contextPath}/user/edit/${userId}"
            modelAttribute="userDTO"
@@ -27,8 +28,7 @@
 
     <%--<form:input path="oldPassword" placeholder="Your old password"/>--%>
 
-
-        <form:input path="username" value="${userDTO.username}" cssClass="form-input"/>
+        <form:hidden path="username" value="${userDTO.username}" cssClass="form-input"/>
     <%--<form:password path="password" placeholder="Enter Your new password" cssClass="form-input"/>--%>
     <%--<form:errors path="password" cssClass="alert alert-danger" element="div"/>--%>
 
@@ -38,10 +38,10 @@
     <form:textarea path="description" cssClass="form-input" placeholder="Description"/>
      <form:errors path="description" cssClass="alert alert-danger" element="div"/>
 
-     <form:input path="address" cssClass="form-input" placeholder="Description"/>
+     <form:input path="address" cssClass="form-input" placeholder="Address"/>
         <form:errors path="address" cssClass="alert alert-danger" element="div"/>
 
-        <form:input path="accountNumber" cssClass="form-input" placeholder="Description"/>
+        <form:input path="accountNumber" cssClass="form-input" placeholder="Account Number"/>
         <form:errors path="accountNumber" cssClass="alert alert-danger" element="div"/>
     </c:if>
 
@@ -54,14 +54,9 @@
                       itemValue="id"
                       itemLabel="name" />
     </form:select>
-    </c:if>
 
-    <c:if test='${fn:contains(currentUserRoles, "Teacher")}'>
     Groups:
     <form:select path="groups" multiple="true">
-        <%--<c:forEach items="${groups}" var="group">--%>
-            <%--<option value="${group.id}" >${group.name}</option>--%>
-        <%--</c:forEach>--%>
         <form:options items="${groups}"
                       itemValue="id"
                       itemLabel="name" />
