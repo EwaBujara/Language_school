@@ -24,6 +24,7 @@ public class FormaterConfig implements WebMvcConfigurer {
         registry.addConverter(getThreadConverter());
         registry.addConverter(getCommentConverter());
         registry.addConverter(getUserDetailsConverter());
+        registry.addConverter(getLinkConverter());
     }
 
     @Bean
@@ -46,6 +47,9 @@ public class FormaterConfig implements WebMvcConfigurer {
 
     @Bean
     public UserDetailsConverter getUserDetailsConverter(){return new UserDetailsConverter();}
+
+    @Bean
+    public LinkConverter getLinkConverter(){return new LinkConverter();}
 
 }
 

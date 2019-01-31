@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -23,6 +24,9 @@ public class Group {
 
     @OneToMany(mappedBy = "group")
     private List<Thread> threads;
+
+    @OneToMany(mappedBy = "group")
+    private List<Link> links = new ArrayList<>();
 
     public Group() {
     }
@@ -57,6 +61,14 @@ public class Group {
 
     public void setThreads(List<Thread> threads) {
         this.threads = threads;
+    }
+
+    public List<Link> getLinks() {
+        return links;
+    }
+
+    public void setLinks(List<Link> links) {
+        this.links = links;
     }
 
     public String toString() {

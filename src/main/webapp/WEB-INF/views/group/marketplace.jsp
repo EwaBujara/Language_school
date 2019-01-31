@@ -12,8 +12,29 @@
     <c:if test="${group.id != 1}">
     <a class="btn btn-info" href="http://localhost:8080/group/members/${group.id}">${group.name}-Members List</a>
     </c:if>
+
+    <c:if test='${ ( fn:contains(currentUserRoles, "Admin")
+    or (fn:contains(currentUserRoles,"Teacher") and (fn:contains(currentUserGroups,group.name) and group.id!=1)))}'>
+        <a class="btn btn-info" href="http://localhost:8080/group/${group.id}/addLink">Add New Link</a>
+    </c:if>
 </div>
 
+<h3>Discover the Amazing World of Education:</h3>
+<table class="table table-striped">
+    <tr>
+        <th>Title</th>
+        <th>Actions</th>
+        <th>View</th>
+    </tr>
+    <c:forEach items="${links}" var="link">
+        <tr>
+            <td>${link.title}</td>
+            <td><a class="btn btn-dark" href="${link.url}">Enter</a></td>
+            <td><iframe src="${link.url}">IFrame</iframe></td>
+        </tr>
+
+    </c:forEach>
+</table>
 
 </body>
 </html>

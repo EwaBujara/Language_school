@@ -8,7 +8,8 @@
     <%@include file="/WEB-INF/views/header.jsp"%>
 <body class="p-3 mb-2 bg-info text-white">
 
-<c:if test='${fn:contains(currentUserRoles, "Teacher")}'>
+<c:if test='${fn:contains(currentUserRoles, "Admin")
+    or (fn:contains(currentUserRoles,"Teacher") and (fn:contains(currentUserGroups,group.name)))}'>
 <a class="btn btn-dark" href="http://localhost:8080/forum/${groupId}/add">Add New Thread</a>
 </c:if>
 

@@ -8,9 +8,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.entity.Group;
+import pl.coderslab.entity.Link;
 import pl.coderslab.repository.GroupRepository;
+import pl.coderslab.repository.LinkRepository;
 import pl.coderslab.repository.UserRepository;
 
+import javax.persistence.GeneratedValue;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -23,6 +26,9 @@ public class AdminController {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    LinkRepository linkRepository;
 
     @GetMapping
     public String panelAccess(){
@@ -57,4 +63,5 @@ public class AdminController {
         groupRepository.save(group);
         return "redirect:"+request.getContextPath()+"/admin";
     }
+
 }

@@ -5,7 +5,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Add New Group</title>
+    <title>Add New Link</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <style>
         input{
@@ -20,12 +20,15 @@
 
 
 <form:form method="post"
-           modelAttribute="group"
-           action="${pageContext.request.contextPath}/admin/addGroup"
+           modelAttribute="link"
+           action="${pageContext.request.contextPath}/group/${groupId}/addLink"
            cssClass="container col-6" >
 
-    <form:input path="name" placeholder="Group Name" cssClass="form-input"/>
-    <form:errors path="name" cssClass="alert alert-danger" element="div"/>
+    <form:input path="title" placeholder="Link title" cssClass="form-input"/>
+    <form:errors path="title" cssClass="alert alert-danger" element="div"/>
+
+    <form:input path="url" placeholder="Link URL" cssClass="form-input"/>
+    <form:errors path="url" cssClass="alert alert-danger" element="div"/>
 
     <input type="submit" value="Send"  class="btn btn-dark">
 </form:form>
