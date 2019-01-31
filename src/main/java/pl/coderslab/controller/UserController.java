@@ -5,12 +5,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import pl.coderslab.dto.UserDTO;
 import pl.coderslab.entity.Group;
 import pl.coderslab.entity.Role;
 import pl.coderslab.entity.User;
+import pl.coderslab.entity.UserDetails;
 import pl.coderslab.repository.GroupRepository;
 import pl.coderslab.repository.RoleRepository;
+import pl.coderslab.repository.UserDetailsRepository;
 import pl.coderslab.repository.UserRepository;
+import pl.coderslab.service.UserDetailsService;
 import pl.coderslab.service.UserService;
 import pl.coderslab.validator.NewUserValidator;
 import pl.coderslab.validator.UserLogValidator;
@@ -41,6 +45,12 @@ public class UserController {
 
     @Autowired
     private GroupRepository groupRepository;
+
+    @Autowired
+    private UserDetailsRepository userDetailsRepository;
+
+    @Autowired
+    UserDetailsService userDetailsService;
 
     @GetMapping("/registration")
     public String registration(Model model) {
@@ -113,53 +123,41 @@ public class UserController {
 
     }
 
+
+
+//    @Transactional
+    @GetMapping("/edit/{userId}")
+    public String add(
+            Model model,
+            @PathVariable Long userId){
+
+        User user = userRepository.findOne(userId);
+        UserDetails userDetails = userDetailsRepository.findByUserUsername(user.getUsername());
+        UserDTO userDTO = userDetailsService.parseToDTO(user, userDetails);
+
+        model.addAttribute("userDTO",userDTO);
+        model.addAttribute("userId", userId);
+        return "user/form";
+    }
+
+    @PostMapping("/edit/{userId}")
+    public String add(@ModelAttribute("userDTO") UserDTO userDTO,
+                      @PathVariable Long userId,
+                      HttpServletRequest request){
+        User user = userDetailsService.parseToUser(userDTO);
+        userRepository.save(user);
+        UserDetails userDetails = userDetailsService.parseToUserDetails(userDTO);
+        userDetailsRepository.save(userDetails);
+        return "redirect:"+request.getContextPath()+"/user/show/"+userId;
+    }
+
     @ModelAttribute("users")
     public List<User> users (){return userRepository.findAll();}
 
     @ModelAttribute("roles")
     public List<Role> roles(){return roleRepository.findAll();}
 
-
-    @Transactional
-    @GetMapping("/edit/{id}")
-    public String add(
-            Model model,
-            @PathVariable Long id){
-
-        User user = userRepository.findOne(id);
-        model.addAttribute("user", user);
-
-        List<Group> groups = groupRepository.findAll();
-        model.addAttribute("groups",groups);
-        return "user/form";
-    }
-//
-//    @RequestMapping("/delete/{id}")
-//    public String delete(
-//            @PathVariable Long id,
-//            HttpServletRequest request,
-//            HttpSession session){
-//        userService.delete(session,id);
-//        return "redirect:"+request.getContextPath()+"/home";
-//    }
-//
-//    @GetMapping("/student")
-//    public String home1Sender(){
-//
-//        return "student";
-//    }
-//
-//    @GetMapping("/teacher")
-//    public String home2Sender(){
-//
-//        return "teacher";
-//    }
-//
-//    @ModelAttribute("users")
-//    public List<User> users (){return userRepository.findAll();}
-//
-//    @ModelAttribute("roles")
-//    public List<Role> roles(){return roleRepository.findAll();}
-
+    @ModelAttribute("groups")
+    public List<Group> groups(){return groupRepository.findAll();}
 }
 

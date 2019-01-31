@@ -18,7 +18,7 @@
 <body class="p-3 mb-2 bg-info text-white">
 
 <form:form method="post"
-           action="${pageContext.request.contextPath}/user/save"
+           action="${pageContext.request.contextPath}/user/edit/${userId}"
            modelAttribute="userDTO"
            cssClass="container col-2" >
 
@@ -27,21 +27,29 @@
 
     <%--<form:input path="oldPassword" placeholder="Your old password"/>--%>
 
-    <c:if test="${currentUser.id == userDTO.id}">
+
+        <form:input path="username" value="${userDTO.username}" cssClass="form-input"/>
     <%--<form:password path="password" placeholder="Enter Your new password" cssClass="form-input"/>--%>
     <%--<form:errors path="password" cssClass="alert alert-danger" element="div"/>--%>
 
     <%--<form:input type="password" path="passwordConfirm" cssClass="form-input" placeholder="Confirm your new password"/>--%>
     <%--<form:errors path="passwordConfirm" cssClass="alert alert-danger" element="div"/>--%>
+    <c:if test="${currentUser.username == userDTO.username}">
+    <form:textarea path="description" cssClass="form-input" placeholder="Description"/>
+     <form:errors path="description" cssClass="alert alert-danger" element="div"/>
 
-    <form:textarea path="details.description" cssClass="form-input" placeholder="Description"/>
+     <form:input path="address" cssClass="form-input" placeholder="Description"/>
+        <form:errors path="address" cssClass="alert alert-danger" element="div"/>
+
+        <form:input path="accountNumber" cssClass="form-input" placeholder="Description"/>
+        <form:errors path="accountNumber" cssClass="alert alert-danger" element="div"/>
     </c:if>
 
     <c:if test='${fn:contains(currentUserRoles, "Admin")}'>
     <p></p>
-    Enabled: <form:checkbox path="enabled" value="${userDTO.enabled}"/>
+    Enabled: <form:checkbox path="enabled" value="${enabled}"/>
     Roles:
-    <form:select path="roles">
+    <form:select path="roles" multiple="true">
         <form:options items="${roles}"
                       itemValue="id"
                       itemLabel="name" />
@@ -50,11 +58,14 @@
 
     <c:if test='${fn:contains(currentUserRoles, "Teacher")}'>
     Groups:
-    <select name="groups" multiple>
-        <c:forEach items="${groups}" var="group">
-            <option value="${group.id}" >${group.name}</option>
-        </c:forEach>
-    </select>
+    <form:select path="groups" multiple="true">
+        <%--<c:forEach items="${groups}" var="group">--%>
+            <%--<option value="${group.id}" >${group.name}</option>--%>
+        <%--</c:forEach>--%>
+        <form:options items="${groups}"
+                      itemValue="id"
+                      itemLabel="name" />
+    </form:select>
     </c:if>
 
     <input type="submit" value="Submit" class="btn btn-dark">

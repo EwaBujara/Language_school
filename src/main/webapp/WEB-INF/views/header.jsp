@@ -11,6 +11,7 @@
     <p class="text-right">Welcome, ${currentUser.getUsername()}</p>
     <a class="btn btn-info float-right" href="http://localhost:8080/home">Log OUT</a>
         <p></p>
+        <a class="btn btn-info" href="http://localhost:8080/group/1">Home</a>
         <c:if test='${fn:contains(currentUserRoles, "Admin")}'>
         <a class="btn btn-info" href="http://localhost:8080/admin">Admin panel</a>
         </c:if>

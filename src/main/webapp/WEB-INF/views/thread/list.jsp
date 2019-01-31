@@ -8,10 +8,16 @@
     <%@include file="/WEB-INF/views/header.jsp"%>
 <body class="p-3 mb-2 bg-info text-white">
 
-<c:if test='${fn:contains(currentUserRoles, "Admin")
-    or (fn:contains(currentUserRoles,"Teacher") and (fn:contains(currentUserGroups,group.name)))}'>
+<c:if test='${ ( fn:contains(currentUserRoles, "Admin")
+    or (fn:contains(currentUserRoles,"Teacher") and (fn:contains(currentUserGroups,group.name) and groupId!=1)))}'>
 <a class="btn btn-dark" href="http://localhost:8080/forum/${groupId}/add">Add New Thread</a>
 </c:if>
+
+
+<%--<c:if test='${ ( fn:contains(currentUserRoles, "Admin")--%>
+    <%--or (fn:contains(currentUserRoles,"Teacher") and (fn:contains(currentUserGroups,group.name) and groupId= 1)))}'>--%>
+    <%--<a class="btn btn-info" href="http://localhost:8080/group/${group.id}/addLink">Add New Link</a>--%>
+<%--</c:if>--%>
 
 <table class="table table-striped">
     <tr>

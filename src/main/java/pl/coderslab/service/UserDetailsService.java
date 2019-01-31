@@ -37,9 +37,25 @@ public class UserDetailsService {
         userDTO.setEnabled(user.isEnabled());
         userDTO.setRoles(roleRepository.findAllByUsers(Arrays.asList(user)));
         userDTO.setGroups(groupRepository.findByMembers(user));
-        userDTO.setDescription(userDetails.getDescription());
-        userDTO.setAddress(userDetails.getAddress());
-        userDTO.setAccountNumber(userDetails.getAccountNumber());
+        if(null == userDetails.getDescription()){
+            userDTO.setDescription("");
+        }else {
+
+            userDTO.setDescription(userDetails.getDescription());
+        }
+
+        if(userDetails.getAddress() == null){
+            userDTO.setAddress("");
+        }else {
+
+            userDTO.setAddress(userDetails.getAddress());
+        }
+        if(userDetails.getAccountNumber()==null){
+            userDTO.setAccountNumber("");
+        }else {
+
+            userDTO.setAccountNumber(userDetails.getAccountNumber());
+        }
         return userDTO;
     }
 

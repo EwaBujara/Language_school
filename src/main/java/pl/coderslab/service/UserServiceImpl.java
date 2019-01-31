@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 import pl.coderslab.entity.Group;
 import pl.coderslab.entity.Role;
 import pl.coderslab.entity.User;
+import pl.coderslab.entity.UserDetails;
 import pl.coderslab.repository.GroupRepository;
 import pl.coderslab.repository.RoleRepository;
+import pl.coderslab.repository.UserDetailsRepository;
 import pl.coderslab.repository.UserRepository;
 
 import javax.servlet.http.HttpSession;
@@ -30,15 +32,25 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private GroupRepository groupRepository;
 
+    @Autowired
+    private UserDetailsRepository userDetailsRepository;
+
     @Override
     public void save(User user) {
         user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
         if(user.getRoles().size()==0){
             user.setRoles(Arrays.asList(roleRepository.findByName("User")));
         }
+
         user.setGroups(Arrays.asList(groupRepository.findByName("Bucket")));
         user.setEnabled(true);
+
         userRepository.save(user);
+
+        UserDetails userDetails = new UserDetails();
+        userDetails.setUser(user);
+        userDetailsRepository.save(userDetails);
+
     }
 
     @Override
