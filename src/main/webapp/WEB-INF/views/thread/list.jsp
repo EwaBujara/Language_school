@@ -13,11 +13,7 @@
 <a class="btn btn-dark" href="http://localhost:8080/forum/${groupId}/add">Add New Thread</a>
 </c:if>
 
-
-<%--<c:if test='${ ( fn:contains(currentUserRoles, "Admin")--%>
-    <%--or (fn:contains(currentUserRoles,"Teacher") and (fn:contains(currentUserGroups,group.name) and groupId= 1)))}'>--%>
-    <%--<a class="btn btn-info" href="http://localhost:8080/group/${group.id}/addLink">Add New Link</a>--%>
-<%--</c:if>--%>
+<%--<h3>${group.name}</h3>--%>
 
 <table class="table table-striped">
     <tr>

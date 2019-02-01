@@ -1,4 +1,4 @@
-package pl.coderslab.controller;
+package pl.coderslab.controller.web;
 
 import com.sun.tracing.dtrace.ProviderAttributes;
 import org.springframework.beans.factory.annotation.Autowired;

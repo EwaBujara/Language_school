@@ -1,4 +1,4 @@
-package pl.coderslab.controller;
+package pl.coderslab.controller.web;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

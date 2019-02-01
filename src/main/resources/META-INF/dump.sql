@@ -33,7 +33,7 @@ CREATE TABLE `LS_comments` (
   KEY `FKni5ofwy8ocj6deqc1gx93kvy3` (`user_id`),
   CONSTRAINT `FKni5ofwy8ocj6deqc1gx93kvy3` FOREIGN KEY (`user_id`) REFERENCES `LS_users` (`id`),
   CONSTRAINT `FKqrkifmjmpl7g432978bfnsiqe` FOREIGN KEY (`thread_id`) REFERENCES `LS_threads` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,6 +42,7 @@ CREATE TABLE `LS_comments` (
 
 LOCK TABLES `LS_comments` WRITE;
 /*!40000 ALTER TABLE `LS_comments` DISABLE KEYS */;
+INSERT INTO `LS_comments` VALUES (2,'2019-02-01','But I\'m a student and I can leave comment here',2,3),(3,'2019-02-01','But I\'m a teacher and I can leave a message here. ',1,2),(4,'2019-02-01','I\'m a student and i also can leave a comment',1,3),(5,'2019-02-01','OK :)',3,3);
 /*!40000 ALTER TABLE `LS_comments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -56,7 +57,7 @@ CREATE TABLE `LS_groups` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -65,7 +66,7 @@ CREATE TABLE `LS_groups` (
 
 LOCK TABLES `LS_groups` WRITE;
 /*!40000 ALTER TABLE `LS_groups` DISABLE KEYS */;
-INSERT INTO `LS_groups` VALUES (1,'Bucket');
+INSERT INTO `LS_groups` VALUES (1,'Bucket'),(2,'Group 1');
 /*!40000 ALTER TABLE `LS_groups` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -84,7 +85,7 @@ CREATE TABLE `LS_links` (
   PRIMARY KEY (`id`),
   KEY `FK8yf75mr3tuj7p6l2ewqfed7oo` (`group_id`),
   CONSTRAINT `FK8yf75mr3tuj7p6l2ewqfed7oo` FOREIGN KEY (`group_id`) REFERENCES `LS_groups` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,6 +94,7 @@ CREATE TABLE `LS_links` (
 
 LOCK TABLES `LS_links` WRITE;
 /*!40000 ALTER TABLE `LS_links` DISABLE KEYS */;
+INSERT INTO `LS_links` VALUES (1,'BY or WITH','https://www.youtube.com/embed/J0FDlPkWGDs',1),(2,'Conversations','https://www.youtube.com/embed/QTJ02h7uiXs',1),(3,'WHAT or WHICH','https://www.youtube.com/embed/zAKnC2kr1_I',1),(4,'Pronunciation Training Techniques','https://www.youtube.com/embed/VcONw2BBfb8',2),(5,'50 Words You\'re Pronouncing WRONGLY','https://www.youtube.com/embed/TdtUjWb0O9w',2);
 /*!40000 ALTER TABLE `LS_links` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -190,7 +192,7 @@ CREATE TABLE `LS_threads` (
   KEY `FK49tkqa4og5cmq8rw5mwjd5e8b` (`user_id`),
   CONSTRAINT `FK49tkqa4og5cmq8rw5mwjd5e8b` FOREIGN KEY (`user_id`) REFERENCES `LS_users` (`id`),
   CONSTRAINT `FKt5sjkgk3h5qcb5tqktsv55916` FOREIGN KEY (`group_id`) REFERENCES `LS_groups` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -199,6 +201,7 @@ CREATE TABLE `LS_threads` (
 
 LOCK TABLES `LS_threads` WRITE;
 /*!40000 ALTER TABLE `LS_threads` DISABLE KEYS */;
+INSERT INTO `LS_threads` VALUES (1,'2019-02-01','It\'s a main group (called Bucket) - only an Admin can add new Thread here.','Admin Thread',1,1),(2,'2019-02-01','Only Teacher can star a new Thread ','Teacher Thread',2,2),(3,'2019-02-01','This is very interesting and very important information for my students.','Another Thread',2,2);
 /*!40000 ALTER TABLE `LS_threads` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -218,7 +221,7 @@ CREATE TABLE `LS_user_details` (
   PRIMARY KEY (`id`),
   KEY `FKjpvlifhcsps8j7jyx0r94a7rb` (`user_id`),
   CONSTRAINT `FKjpvlifhcsps8j7jyx0r94a7rb` FOREIGN KEY (`user_id`) REFERENCES `LS_users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -227,7 +230,7 @@ CREATE TABLE `LS_user_details` (
 
 LOCK TABLES `LS_user_details` WRITE;
 /*!40000 ALTER TABLE `LS_user_details` DISABLE KEYS */;
-INSERT INTO `LS_user_details` VALUES (1,NULL,NULL,NULL,1);
+INSERT INTO `LS_user_details` VALUES (1,'123 152 456','my address','Description',1),(2,'123 456 789','teacher address','Teacher description',2),(3,'789 456 123','Student address','Student description',3);
 /*!40000 ALTER TABLE `LS_user_details` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -245,7 +248,7 @@ CREATE TABLE `LS_users` (
   `password` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `username` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -254,7 +257,7 @@ CREATE TABLE `LS_users` (
 
 LOCK TABLES `LS_users` WRITE;
 /*!40000 ALTER TABLE `LS_users` DISABLE KEYS */;
-INSERT INTO `LS_users` VALUES (1,'admin@admin.com',_binary '','$2a$10$HACzerE8LgsSs.9vcR.Il.VrLDrGcbwM9hy6FoHMXVTnjnYP4610.','Admin');
+INSERT INTO `LS_users` VALUES (1,'admin@admin.com',_binary '','$2a$10$26xtoJP/vtiwetD8nDV3..d05hKsMKfkUf4KFKqrrHf/zWoktXG.C','Admin'),(2,'ewa@mail.com',_binary '','$2a$10$yvyl5pWGG9FaA9lUEtiwbeJemGbqGbiv76utpx9u9Ee9H.EDo.wiC','Teacher'),(3,'mail@mail.com',_binary '','$2a$10$FcRCWSWOVZUva9eNcgc4.u.o.1ftB5Eto2iXbrsMWLTgp7Cm.ugMy','Student');
 /*!40000 ALTER TABLE `LS_users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -281,7 +284,7 @@ CREATE TABLE `LS_users_LS_groups` (
 
 LOCK TABLES `LS_users_LS_groups` WRITE;
 /*!40000 ALTER TABLE `LS_users_LS_groups` DISABLE KEYS */;
-INSERT INTO `LS_users_LS_groups` VALUES (1,1);
+INSERT INTO `LS_users_LS_groups` VALUES (1,1),(2,1),(2,2),(3,1),(3,2);
 /*!40000 ALTER TABLE `LS_users_LS_groups` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -308,7 +311,7 @@ CREATE TABLE `LS_users_LS_roles` (
 
 LOCK TABLES `LS_users_LS_roles` WRITE;
 /*!40000 ALTER TABLE `LS_users_LS_roles` DISABLE KEYS */;
-INSERT INTO `LS_users_LS_roles` VALUES (1,1),(1,2),(1,3);
+INSERT INTO `LS_users_LS_roles` VALUES (1,1),(1,2),(1,3),(2,2),(2,3),(3,3);
 /*!40000 ALTER TABLE `LS_users_LS_roles` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -321,4 +324,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-02-01  9:51:30
+-- Dump completed on 2019-02-01 10:29:04
