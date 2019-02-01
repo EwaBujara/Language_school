@@ -22,6 +22,7 @@
         <a class="btn btn-info" href="http://localhost:8080/group/1">Home</a>
         <a class="btn btn-info" href="http://localhost:8080/user/show/${currentUser.id}">Your profile</a>
         <a class="btn btn-info" href="http://localhost:8080/group/list/${currentUser.id}">Your Groups</a>
+        <a class="btn btn-secondary" href="http://localhost:8080/proposal">Proposal of the Day</a>
     </c:if>
 
     <c:if test="${currentUser == null}">

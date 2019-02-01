@@ -14,9 +14,6 @@ public class HomeController {
     @GetMapping("/home")
     public String homeSender(HttpSession session) throws IOException {
         session.invalidate();
-
-//        Document doc = Jsoup.connect("https://learnenglish.britishcouncil.org/learnenglish-podcasts").get();
-//        doc.select("a").forEach(System.out::println);
         return "index";
     }
 
