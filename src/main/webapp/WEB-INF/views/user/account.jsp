@@ -21,7 +21,7 @@
         <th>Description</th>
      <c:if test='${currentUser.id==user.id or fn:contains(currentUserRoles, "Admin")}'>
         <th>Address</th>
-        <th>Account Number</th>
+        <th>Phone Number</th>
      </c:if>
     </tr>
 

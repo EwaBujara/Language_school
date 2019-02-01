@@ -146,36 +146,7 @@ public class UserController {
                       HttpServletRequest request,
                       HttpSession session){
 
-        User user = userDetailsService.parseToUser(userDTO);
-        UserDetails userDetails = userDetailsService.parseToUserDetails(userDTO);
-        User currentUser =(User)session.getAttribute("currentUser");
-        User oldUser = userRepository.findOne(userId);
-        UserDetails oldUserDetails = userDetailsRepository.findByUserUsername(oldUser.getUsername());
-
-        if(userService.whoAmI(currentUser, "Admin")&&(oldUser.getId()==currentUser.getId())){
-            oldUser.setRoles(user.getRoles());
-            oldUser.setGroups(user.getGroups());
-            oldUser.setEnabled(user.isEnabled());
-            userRepository.save(oldUser);
-            oldUserDetails.setDescription(userDetails.getDescription());
-            oldUserDetails.setAddress(userDetails.getAddress());
-            oldUserDetails.setAccountNumber(userDetails.getAccountNumber());
-            userDetailsRepository.save(oldUserDetails);
-
-        }else if (userService.whoAmI(currentUser, "Admin")&&(oldUser.getId()!=currentUser.getId()))
-        {
-            oldUser.setRoles(user.getRoles());
-            oldUser.setGroups(user.getGroups());
-            oldUser.setEnabled(user.isEnabled());
-            userRepository.save(oldUser);
-
-        }else {
-            oldUserDetails.setDescription(userDetails.getDescription());
-            oldUserDetails.setAddress(userDetails.getAddress());
-            oldUserDetails.setAccountNumber(userDetails.getAccountNumber());
-            userDetailsRepository.save(oldUserDetails);
-        }
-
+        userDetailsService.userDataEditor(userDTO, userId, session);
 
         return "redirect:"+request.getContextPath()+"/user/show/"+userId;
     }

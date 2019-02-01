@@ -35,12 +35,16 @@
     <%--<form:input type="password" path="passwordConfirm" cssClass="form-input" placeholder="Confirm your new password"/>--%>
     <%--<form:errors path="passwordConfirm" cssClass="alert alert-danger" element="div"/>--%>
     <c:if test="${currentUser.username == userDTO.username}">
+
+        Description:
     <form:textarea path="description" cssClass="form-input" placeholder="Description"/>
      <form:errors path="description" cssClass="alert alert-danger" element="div"/>
 
+        Address:
      <form:input path="address" cssClass="form-input" placeholder="Address"/>
         <form:errors path="address" cssClass="alert alert-danger" element="div"/>
 
+        Phone Number:
         <form:input path="accountNumber" cssClass="form-input" placeholder="Account Number"/>
         <form:errors path="accountNumber" cssClass="alert alert-danger" element="div"/>
     </c:if>

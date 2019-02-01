@@ -10,6 +10,7 @@ import pl.coderslab.repository.RoleRepository;
 import pl.coderslab.repository.UserDetailsRepository;
 import pl.coderslab.repository.UserRepository;
 
+import javax.servlet.http.HttpSession;
 import java.util.Arrays;
 
 @Service
@@ -26,6 +27,9 @@ public class UserDetailsService {
 
     @Autowired
     private UserDetailsRepository userDetailsRepository;
+
+    @Autowired
+    private UserService userService;
 
     public UserDTO parseToDTO(User user, UserDetails userDetails){
 
@@ -63,5 +67,37 @@ public class UserDetailsService {
         userDetails.setAddress(userDTO.getAddress());
         userDetails.setAccountNumber(userDTO.getAccountNumber());
         return userDetails;
+    }
+
+    public void userDataEditor(UserDTO userDTO,  Long userId, HttpSession session){
+        User user = parseToUser(userDTO);
+        UserDetails userDetails = parseToUserDetails(userDTO);
+        User currentUser =(User) session.getAttribute("currentUser");
+        User oldUser = userRepository.findOne(userId);
+        UserDetails oldUserDetails = userDetailsRepository.findByUserUsername(oldUser.getUsername());
+
+        if(userService.whoAmI(currentUser, "Admin")&&(oldUser.getId()==currentUser.getId())){
+            oldUser.setRoles(user.getRoles());
+            oldUser.setGroups(user.getGroups());
+            oldUser.setEnabled(user.isEnabled());
+            userRepository.save(oldUser);
+            oldUserDetails.setDescription(userDetails.getDescription());
+            oldUserDetails.setAddress(userDetails.getAddress());
+            oldUserDetails.setAccountNumber(userDetails.getAccountNumber());
+            userDetailsRepository.save(oldUserDetails);
+
+        }else if (userService.whoAmI(currentUser, "Admin")&&(oldUser.getId()!=currentUser.getId()))
+        {
+            oldUser.setRoles(user.getRoles());
+            oldUser.setGroups(user.getGroups());
+            oldUser.setEnabled(user.isEnabled());
+            userRepository.save(oldUser);
+
+        }else {
+            oldUserDetails.setDescription(userDetails.getDescription());
+            oldUserDetails.setAddress(userDetails.getAddress());
+            oldUserDetails.setAccountNumber(userDetails.getAccountNumber());
+            userDetailsRepository.save(oldUserDetails);
+        }
     }
 }
