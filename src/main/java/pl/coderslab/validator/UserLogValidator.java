@@ -28,6 +28,8 @@ public class UserLogValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "NotEmpty");
         if(userService.findByEmail(user.getEmail()) == null){
             errors.rejectValue("email", "nonExisting.userLog.email");
+        } else if(!userService.findByEmail(user.getEmail()).isEnabled()){
+            errors.rejectValue("email", "accessDenied.userLog.email");
         }
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty");
@@ -35,8 +37,7 @@ public class UserLogValidator implements Validator {
             errors.rejectValue("password", "nonMatching.userLog.password");
         }
 
-//        if(!user.isEnabled()){
-//            errors.rejectValue("email", "accessDenied.userLog.email");
-//        }
+
+
     }
 }

@@ -8,11 +8,14 @@
 <title>Language School</title>
 <div class="p-3 mb-2 bg-dark text-white">
     <c:if test="${currentUser != null}">
-    <p class="text-right">Welcome, ${currentUser.getUsername()}</p>
+        <%--<img src="htps://www.federalflags.com/resize/images/_0020_UK-flag-emblem.jpg?bw=1000&w=1000&Abh=1000&h=1000" width="5%">--%>
+
+        <p class="text-right">Welcome, ${currentUser.getUsername()}</p>
         <p></p>
     <a class="btn btn-info float-right" href="http://localhost:8080/home">Log OUT</a>
 
         <p></p>
+        <%--<img src="https://www.federalflags.com/resize/images/_0020_UK-flag-emblem.jpg?bw=1000&w=1000&Abh=1000&h=1000" width="5%">--%>
         <c:if test='${fn:contains(currentUserRoles, "Admin")}'>
             <a class="btn btn-danger" href="http://localhost:8080/admin">Admin panel</a>
         </c:if>

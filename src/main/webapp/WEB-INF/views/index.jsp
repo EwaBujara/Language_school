@@ -13,9 +13,9 @@
 <body class="p-3 mb-2 bg-info text-dark">
 
 <h1 class="text-center">Welcome to Language School</h1>
-<%--<p class="text-center">--%>
-    <%--<img src="../../images/UK-flag-union-jack-1024x683.jpg" width="10%">--%>
-<%--</p>--%>
+<p class="text-center">
+    <img src="https://www.federalflags.com/resize/images/_0020_UK-flag-emblem.jpg?bw=1000&w=1000&Abh=1000&h=1000" width="30%">
+</p>
 
 </body>
 <%@include file="/WEB-INF/views/footer.jsp"%>
