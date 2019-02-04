@@ -1,15 +1,17 @@
 document.addEventListener("DOMContentLoaded", function() {
 
-  showHideDetails("A");
+  showHideDetails("table tr.table-info a");
 });
 
 function showHideDetails(identifier) {
     try
     {
-        var obj = document.getElementsByTagName(identifier);
-        obj.forEach(elem => elem.innerHTML='Proposal');
-        // alert(obj.innerHTML);
-        // obj.innerText = 'Proposal';
+        var obj = document.querySelectorAll(identifier);
+        obj.forEach(elem => {
+            // elem.innerHTML='Proposal';
+            // alert(elem.innerHTML);
+            elem.innerText = 'Proposal';
+        });
     }
     catch (err)
     {
