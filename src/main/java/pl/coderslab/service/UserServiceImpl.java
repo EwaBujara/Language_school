@@ -4,14 +4,8 @@ package pl.coderslab.service;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.coderslab.entity.Group;
-import pl.coderslab.entity.Role;
-import pl.coderslab.entity.User;
-import pl.coderslab.entity.UserDetails;
-import pl.coderslab.repository.GroupRepository;
-import pl.coderslab.repository.RoleRepository;
-import pl.coderslab.repository.UserDetailsRepository;
-import pl.coderslab.repository.UserRepository;
+import pl.coderslab.entity.*;
+import pl.coderslab.repository.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -34,6 +28,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDetailsRepository userDetailsRepository;
+
+    @Autowired
+    private PrivilegeRepository privilegeRepository;
 
     @Override
     public void save(User user) {
@@ -125,8 +122,22 @@ public class UserServiceImpl implements UserService {
         return doesTheListContainsString(getRolesList(user), roleName);
     }
 
+
+
     @Override
     public boolean canI(User user, String privilegeName) {
-        return false;
+
+        List<Role> userRoles = roleRepository.findAllByUsers(Arrays.asList(user));
+        List<Privilege> privileges = new ArrayList<>();
+        userRoles
+                .stream()
+                .map(role -> privileges.addAll(privilegeRepository.findAllByRoles(role)))
+                .collect(Collectors.toList());
+
+        List<String> privilegesName = privileges
+                .stream()
+                .map(Privilege::getName)
+                .collect(Collectors.toList());
+        return doesTheListContainsString(privilegesName, privilegeName);
     }
 }
