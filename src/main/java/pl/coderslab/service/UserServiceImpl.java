@@ -124,4 +124,9 @@ public class UserServiceImpl implements UserService {
     public boolean whoAmI(User user, String roleName) {
         return doesTheListContainsString(getRolesList(user), roleName);
     }
+
+    @Override
+    public boolean canI(User user, String privilegeName) {
+        return false;
+    }
 }

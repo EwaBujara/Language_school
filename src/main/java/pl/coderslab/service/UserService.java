@@ -26,4 +26,6 @@ public interface UserService {
     boolean doesTheListContainsString(List<String> strings,String string);
 
     boolean whoAmI(User user, String string);
+
+    boolean canI(User user, String privilegeName);
 }
