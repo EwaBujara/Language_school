@@ -49,7 +49,7 @@
         <form:errors path="accountNumber" cssClass="alert alert-danger" element="div"/>
     </c:if>
 
-    <c:if test='${fn:contains(currentUserRoles, "Admin")}'>
+    <c:if test='${fn:contains(currentUserRoles, "Admin")&&currentUser.id!=1}'>
     <p></p>
     Enabled: <form:checkbox path="enabled" value="${enabled}"/>
     Roles:
@@ -58,7 +58,10 @@
                       itemValue="id"
                       itemLabel="name" />
     </form:select>
+    </c:if>
 
+
+    <c:if test='${fn:contains(currentUserRoles, "Admin")}'>
     Groups:
     <form:select path="groups" multiple="true">
         <form:options items="${groups}"
