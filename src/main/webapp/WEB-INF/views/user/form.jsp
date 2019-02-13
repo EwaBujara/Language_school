@@ -49,7 +49,7 @@
         <form:errors path="accountNumber" cssClass="alert alert-danger" element="div"/>
     </c:if>
 
-    <c:if test='${fn:contains(currentUserRoles, "Admin")}'>
+    <c:if test='${fn:contains(currentUserRoles, "Admin")}
     <p></p>
     Enabled: <form:checkbox path="enabled" value="${enabled}"/>
     Roles:
