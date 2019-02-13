@@ -1,4 +1,4 @@
-## CodersLab Fina Project  `Programming School`
+## CodersLab Final Project  `Programming School`
 >Spring MVC, Hibernate
 
 *Language School* management application. 
