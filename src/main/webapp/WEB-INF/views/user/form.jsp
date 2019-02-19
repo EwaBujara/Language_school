@@ -23,17 +23,17 @@
            modelAttribute="userDTO"
            cssClass="container col-2" >
 
-    <%--<form:input path="email" placeholder="Email" cssClass="form-input"/>--%>
-    <%--<form:errors path="email" cssClass="alert alert-danger" element="div"/>--%>
 
+
+    <form:hidden path="username" value="${userDTO.username}" cssClass="form-input"/>
+    <%--TODO changing user password--%>
     <%--<form:input path="oldPassword" placeholder="Your old password"/>--%>
-
-        <form:hidden path="username" value="${userDTO.username}" cssClass="form-input"/>
     <%--<form:password path="password" placeholder="Enter Your new password" cssClass="form-input"/>--%>
     <%--<form:errors path="password" cssClass="alert alert-danger" element="div"/>--%>
 
     <%--<form:input type="password" path="passwordConfirm" cssClass="form-input" placeholder="Confirm your new password"/>--%>
     <%--<form:errors path="passwordConfirm" cssClass="alert alert-danger" element="div"/>--%>
+
     <c:if test="${currentUser.username == userDTO.username}">
 
         Description:
@@ -49,7 +49,11 @@
         <form:errors path="accountNumber" cssClass="alert alert-danger" element="div"/>
     </c:if>
 
+<<<<<<< HEAD
     <c:if test='${fn:contains(currentUserRoles, "Admin")}
+=======
+    <c:if test='${fn:contains(currentUserRoles, "Admin")&&currentUser.id!=userId}'>
+>>>>>>> 23d40ce45b7216d3b953cbc71ef07b3fa6882f23
     <p></p>
     Enabled: <form:checkbox path="enabled" value="${enabled}"/>
     Roles:
@@ -58,7 +62,10 @@
                       itemValue="id"
                       itemLabel="name" />
     </form:select>
+    </c:if>
 
+
+    <c:if test='${fn:contains(currentUserRoles, "Admin")}'>
     Groups:
     <form:select path="groups" multiple="true">
         <form:options items="${groups}"
