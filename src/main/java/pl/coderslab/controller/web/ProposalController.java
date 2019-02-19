@@ -16,8 +16,6 @@ public class ProposalController {
     @RequestMapping("/proposal")
     public String showProposal(Model model) throws IOException {
 
-//        Document doc = Jsoup.connect("https://learnenglish.britishcouncil.org/learnenglish-podcasts").get();
-//        Document doc = Jsoup.connect("https://www.bbc.co.uk/podcasts").get();
         Document doc = Jsoup.connect("https://www.podcastsinenglish.com").get();
 
         ArrayList<String > links = new ArrayList<>();
@@ -26,7 +24,6 @@ public class ProposalController {
                 .map(element -> String.valueOf(element))
                 .filter(element -> element.contains("podcast"))
                 .filter(element -> !element.contains("iTun"))
-//                .filter(element -> element.contains("all"))
                 .limit(10)
                 .peek(System.out::println)
                 .collect(Collectors.toList());

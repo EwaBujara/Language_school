@@ -27,7 +27,6 @@ Functionalities:
   * see his groups' members list
   * send private message to others
 
-
 Technologies:
 * Spring MVC
 * Hibernate 
