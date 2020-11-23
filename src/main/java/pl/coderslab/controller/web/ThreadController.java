@@ -1,6 +1,6 @@
 package pl.coderslab.controller.web;
 
-import com.sun.tracing.dtrace.ProviderAttributes;
+//import com.sun.tracing.dtrace.ProviderAttributes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
