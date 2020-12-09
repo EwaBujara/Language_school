@@ -21,6 +21,7 @@
         <spring-orm.version>4.3.7.RELEASE</spring-orm.version>
         <hibernate-core.version>5.2.9.Final</hibernate-core.version>
         <spring-data-jpa.version>1.11.1.RELEASE</spring-data-jpa.version>
+        <javax.servlet.jsp.version>2.1</javax.servlet.jsp.version>
     </properties>
 
 
@@ -32,6 +33,13 @@
             <version>${spring.version}</version>
         </dependency>
 
+		<dependency>
+  		<groupId>javax.servlet.jsp</groupId>
+  		<artifactId>jsp-api</artifactId>
+  		<version>${javax.servlet.jsp.version}</version>
+  		<scope>provided</scope>
+		</dependency>
+		
         <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
         <dependency>
             <groupId>javax.servlet</groupId>
